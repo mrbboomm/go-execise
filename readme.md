@@ -1,0 +1,1 @@
+To get into the field. Implement payroll calculation but in GoLang
