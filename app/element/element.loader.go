@@ -8,12 +8,12 @@ import (
 
 func Load() []IElementCode {
 	mockCodes := []string{
-		`{"Name": "e1", "Type": "earn", "Param": { "Value": 100 }}`,
-		`{"Name": "e2", "Type": "earn", "Param": { "Value": 10 }}`,
-		`{"Name": "e3", "Type": "earn", "Param": { "Value": 1 }}`,
-		`{"Name": "d1", "Type": "deduction", "Param": { "DeductValue": 3, "Value": 9 }}`,
-		`{"Name": "d2", "Type": "deduction", "Param": { "Value": 9 }}`,
-		`{"Name": "d2", "Type": "ded", "Param": { "Value": 9 }}`,
+		`{"Name": "e1", "Code": "e1", "Type": "earn", "Param": { "Value": 100 }}`,
+		`{"Name": "e2", "Code": "e2", "Type": "earn", "Param": { "Value": 10 }}`,
+		`{"Name": "e3", "Code": "e3", "Type": "earn", "Param": { "Value": 1 }}`,
+		`{"Name": "d1", "Code": "d1", "Type": "deduction", "Param": { "DeductValue": 3, "Value": 9 }}`,
+		`{"Name": "d2", "Code": "d2", "Type": "deduction", "Param": { "Value": 9 }}`,
+		`{"Name": "d2", "Code": "d2", "Type": "ded", "Param": { "Value": 9 }}`,
 	}
 
 	codes := []IElementCode{}

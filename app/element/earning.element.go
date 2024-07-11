@@ -2,7 +2,6 @@ package element
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 type EarningElementFactory struct {
@@ -38,6 +37,5 @@ type EarningElement struct {
 
 func (e *EarningElement) CalValue() (float32, error) {
 	val := e.Param.Value
-	fmt.Println(e.Param)
 	return val, nil
 }

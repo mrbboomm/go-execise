@@ -6,10 +6,13 @@ import (
 
 
 func main() {
-	
+	// app := fiber.New()
+	// runnerAPI := &handler.Runner{}
+	// app.Post("/execute", runnerAPI.Execute)
+	// app.Listen(":8080")
+
 	_runner := runner.New()
 	_runner.Run()
-	_runner.Result()
-
+	_runner.LogResult()
 }
 

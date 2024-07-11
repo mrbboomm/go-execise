@@ -12,7 +12,6 @@ func (f *DeductionElementFactory) Create(el BaseElement, param interface{}) (IEl
 	element.BaseElement = &el
 	data, _ := json.Marshal(param)
 	json.Unmarshal(data, &element.Param)
-	println("json", element.Param)
 	err := element.Param.Validate()
 	if err != nil {
 		return nil, err

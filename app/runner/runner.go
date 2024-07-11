@@ -12,7 +12,6 @@ type ElementOutput struct {
 }
 
 
-
 type Runner struct {
 	status types.CalStatus
 	result float32
@@ -24,8 +23,11 @@ type PayrollBalance float32
 func New() *Runner {
 	return &Runner{status: types.Initial, result: 0, elementOutput: []ElementOutput{}}
 }
+func (r *Runner) Result() []ElementOutput {
+	return r.elementOutput
+}
 
-func (r *Runner) Result() {
+func (r *Runner) LogResult() {
 	fmt.Println("==== Running Result ====")
 	fmt.Printf("status: %s \n", r.status)
 	fmt.Printf("result: %f \n", r.result)
@@ -77,7 +79,3 @@ func (r *Runner) Run() {
 	r.updateStatus(types.Calculated)
 	r.updateStatus(types.Completed)
 }
-
-
-
-

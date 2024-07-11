@@ -7,13 +7,14 @@ type IFactory interface{
 
 type InputElementData struct {
 	Name string
+	Code string
 	Type string
 	Param any
 }
 
 // Register new type of element code here
-func createFactory(elType string) (IFactory, error) {
-	switch (elType){
+func createFactory(elementType string) (IFactory, error) {
+	switch (elementType){
 		case "earn": 
 			_f := EarningElementFactory{}
 			return &_f, nil
@@ -22,7 +23,7 @@ func createFactory(elType string) (IFactory, error) {
 			return &_f, nil
 		}
 	
-	return nil, &ElementError{message: "Invalid Type"}
+	return nil, &ElementError{message: "Invalid Type --- " + elementType}
 }
 
 func CreateElementCode(elementData *InputElementData) (IElementCode, error) { 
