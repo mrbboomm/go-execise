@@ -4,8 +4,6 @@ import (
 	"github.com/mrbboomm/go-execise/app/runner"
 )
 
-// Uncomment this block to pass the first stage
-
 
 func main() {
 	

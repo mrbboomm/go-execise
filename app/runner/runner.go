@@ -4,15 +4,17 @@ import (
 	"fmt"
 
 	"github.com/mrbboomm/go-execise/app/element"
+	"github.com/mrbboomm/go-execise/app/types"
 )
 type ElementOutput struct {
 	Element element.IElementCode
 	Output float32
 }
 
-type CalStatus string // TODO: use union type
+
+
 type Runner struct {
-	status CalStatus
+	status types.CalStatus
 	result float32
 	elementOutput []ElementOutput
 }
@@ -20,7 +22,7 @@ type Runner struct {
 type PayrollBalance float32
 
 func New() *Runner {
-	return &Runner{status: "init", result: 0, elementOutput: []ElementOutput{}}
+	return &Runner{status: types.Initial, result: 0, elementOutput: []ElementOutput{}}
 }
 
 func (r *Runner) Result() {
@@ -34,9 +36,9 @@ func (r *Runner) Result() {
 	}
 }
 
-func (r *Runner) updateStatus(status CalStatus) {
+func (r *Runner) updateStatus(status types.CalStatus) {
 	r.status = status
-	fmt.Printf("cal state: %s \n", r.status)
+	fmt.Printf("⏩⏩⏩ cal state: %s \n", r.status)
 }
 
 func handleCal(r *Runner, el element.IElementCode) {
@@ -64,13 +66,15 @@ func handleCal(r *Runner, el element.IElementCode) {
 	}
 
 func (r *Runner) Run() {
-	r.updateStatus("starting")
+	r.updateStatus(types.Initial)
+	r.updateStatus(types.Loading)
 	codes := element.LoadElements()
-	r.updateStatus("processing")
+	r.updateStatus(types.Calulating)
 	for i := 0; i < len(codes) ; i++ {
 		_c := codes[i]
 		handleCal(r, _c)
 	}
-	r.updateStatus("done")
+	r.updateStatus(types.Calculated)
+	r.updateStatus(types.Completed)
 }
 
