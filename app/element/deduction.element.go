@@ -26,7 +26,7 @@ type DeductionParam struct {
 }
 
 func (p *DeductionParam) Validate() error {
-	if p.DeductValue < 0 {
+	if p.DeductValue <= 0 {
 		return &ElementError{message: "Deduction Value must more than 0"}
 	}
 	return nil

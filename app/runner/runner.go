@@ -68,7 +68,7 @@ func handleCal(r *Runner, el element.IElementCode) {
 func (r *Runner) Run() {
 	r.updateStatus(types.Initial)
 	r.updateStatus(types.Loading)
-	codes := element.LoadElements()
+	codes := element.Load()
 	r.updateStatus(types.Calulating)
 	for i := 0; i < len(codes) ; i++ {
 		_c := codes[i]
@@ -77,4 +77,7 @@ func (r *Runner) Run() {
 	r.updateStatus(types.Calculated)
 	r.updateStatus(types.Completed)
 }
+
+
+
 
