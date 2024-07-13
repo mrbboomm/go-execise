@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/mrbboomm/go-execise/app/loader"
 	"github.com/mrbboomm/go-execise/app/runner"
 )
 
@@ -10,8 +11,8 @@ func main() {
 	// runnerAPI := &handler.Runner{}
 	// app.Post("/execute", runnerAPI.Execute)
 	// app.Listen(":8080")
-
-	_runner := runner.New()
+	loader := &loader.MockLoader{}
+	_runner := runner.NewRunner(loader)
 	_runner.Run()
 	_runner.LogResult()
 }

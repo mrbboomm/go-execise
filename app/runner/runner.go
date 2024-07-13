@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/mrbboomm/go-execise/app/element"
+	"github.com/mrbboomm/go-execise/app/loader"
 	"github.com/mrbboomm/go-execise/app/types"
 )
 type ElementOutput struct {
@@ -13,29 +14,35 @@ type ElementOutput struct {
 
 
 type Runner struct {
+	elements []element.IElementCode
 	status types.CalStatus
 	result float32
 	elementOutput []ElementOutput
+	loader loader.ILoader
 }
 
-type PayrollBalance float32
+func (r *Runner) Load() []element.IElementCode {
+	return r.loader.LoadElements()
+}
 
-func New() *Runner {
-	return &Runner{status: types.Initial, result: 0, elementOutput: []ElementOutput{}}
+func NewRunner(loader loader.ILoader) *Runner {
+	return &Runner{status: types.Initial, result: 0, elementOutput: []ElementOutput{}, loader: loader}
 }
 func (r *Runner) Result() []ElementOutput {
 	return r.elementOutput
 }
 
-func (r *Runner) LogResult() {
-	fmt.Println("==== Running Result ====")
-	fmt.Printf("status: %s \n", r.status)
-	fmt.Printf("result: %f \n", r.result)
-	fmt.Println("runningElements")
+func (r *Runner) LogResult() string {
+	var resultStr = ""
+	resultStr += fmt.Sprintln("==== Running Result ====")
+	resultStr += fmt.Sprintf("status: %s \n", r.status)
+	resultStr += fmt.Sprintf("result: %f \n", r.result)
+	resultStr += fmt.Sprintln("runningElements")
 	for i := 0; i < len(r.elementOutput); i++ {
 		_el := r.elementOutput[i]
-		fmt.Printf("  code: %s type: %s val: %f\n", _el.Element.GetCode(), _el.Element.GetType(), _el.Output)
+		resultStr += fmt.Sprintf("  code: %s type: %s val: %f\n", _el.Element.GetCode(), _el.Element.GetType(), _el.Output)
 	}
+	return resultStr
 }
 
 func (r *Runner) updateStatus(status types.CalStatus) {
@@ -70,7 +77,7 @@ func handleCal(r *Runner, el element.IElementCode) {
 func (r *Runner) Run() {
 	r.updateStatus(types.Initial)
 	r.updateStatus(types.Loading)
-	codes := element.Load()
+	codes := r.loader.LoadElements()
 	r.updateStatus(types.Calulating)
 	for i := 0; i < len(codes) ; i++ {
 		_c := codes[i]
